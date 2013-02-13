@@ -1,6 +1,8 @@
 #ifndef BIBLIOSTD_H
 #define BIBLIOSTD_H
 
+#define NBCATEG 5
+
 using namespace std;
 
 #include <iostream>
@@ -9,5 +11,6 @@ using namespace std;
 #include <termios.h>
 #include <unistd.h>
 #include <fstream>
+#include <stdexcept>
 
 #endif
