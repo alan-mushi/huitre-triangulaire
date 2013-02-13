@@ -8,9 +8,12 @@
 #	- la compilation du projet final (c-à-d tri.cpp)
 
 # Déclaration de quelques variables utiles au makefile
-GPP = g++ -Wall
-SRC = ./src
-BIN = ./bin
+GPP = g++ -Wall -ggdb
+SRC = .
+BIN = ../bin
+CP=CProduit
+tCP=testCProduit
+CPB=CProduitBase
 
 # Test de la classe CProduit
 # Compilation du lanceur testCProduit, pour cela (l'ordre de compilation est important en C++) :
@@ -25,20 +28,20 @@ testCProduit : deleteAll compilCProduitBase compilCProduit compilTestCProduit
 # La cible "compilCProduitBase" est exécutée en tapant la commande "make compilCProduitBase"
 compilCProduitBase :
 	@# Précéder chaque commande d'une TABULATION
-	@echo Compilation CProduitBase
-	$(GPP) $(SRC)/CProduitBase.cpp -o $(BIN)/CProduitBase.o -c
+	@echo Compilation $(CPB)
+	$(GPP) $(SRC)/$(CPB).cpp -o $(BIN)/$(CPB).o -c
 
 # La cible "compilCProduit" est exécutée en tapant la commande "make compilCProduit"
 compilCProduit :
 	@# Précéder chaque commande d'une TABULATION
-	@echo Compilation CProduit
-	$(GPP) $(SRC)/CProduit.cpp -o $(BIN)/CProduit.o -c
+	@echo Compilation $(CP)
+	$(GPP) $(SRC)/$(CP).cpp -o $(BIN)/$(CP).o -c
 
 # La cible "testCProduit" est exécutée en tapant la commande "make compilTestCProduit"
 compilTestCProduit :
 	@# Précéder chaque commande d'une TABULATION
-	@echo Compilation testCProduit
-	$(GPP) $(SRC)/testCProduit.cpp $(BIN)/CProduitBase.o $(BIN)/CProduit.o -o $(BIN)/testCProduit.exe
+	@echo Compilation $(tCP)
+	$(GPP) $(SRC)/$(tCP).cpp $(BIN)/$(CPB).o $(BIN)/$(CP).o -o $(BIN)/$(tCP).exe
 
 # La cible "deleteAll" est exécutée en tapant la commande "make deleteAll"
 deleteAll :
