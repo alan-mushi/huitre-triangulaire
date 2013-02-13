@@ -1,3 +1,6 @@
+#ifndef CPRODUITBASE_H
+#define CPRODUITBASE_H
+
 #include "BiblioStd.h"
 
 class CProduitBase {
@@ -12,3 +15,5 @@ class CProduitBase {
 		void setCateg( short cat );
 		string getCode();
 };
+
+#endif
