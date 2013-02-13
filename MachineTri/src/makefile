@@ -1,19 +1,16 @@
 # Makefile du projet "Machine de tri"
 
-# Chaque classe du projet doit être testée séparément (3 au total).
-# Il y aura donc un lanceur (main) par classe à tester.
-
 # Ce makefile doit permettre de faire :
 #	- la compilation du lanceur associé à chaque classe à tester
 #	- la compilation du projet final (c-à-d tri.cpp)
 
-# Déclaration de quelques variables utiles au makefile
-GPP = g++ -Wall -ggdb
-SRC = .
-BIN = ../bin
+GPP=g++ -Wall -ggdb
+SRC=.
+BIN=../bin
 CP=CProduit
 tCP=testCProduit
 CPB=CProduitBase
+CPa=CPalette
 
 # Test de la classe CProduit
 # Compilation du lanceur testCProduit, pour cela (l'ordre de compilation est important en C++) :
@@ -22,29 +19,24 @@ CPB=CProduitBase
 #	- ensuite compiler CProduit
 #	- finalement compiler testCProduit
 
-# La cible "testCProduit" est exécutée en tapant la commande "make testCProduit"
 testCProduit : deleteAll compilCProduitBase compilCProduit compilTestCProduit
 
-# La cible "compilCProduitBase" est exécutée en tapant la commande "make compilCProduitBase"
 compilCProduitBase :
-	@# Précéder chaque commande d'une TABULATION
 	@echo Compilation $(CPB)
 	$(GPP) $(SRC)/$(CPB).cpp -o $(BIN)/$(CPB).o -c
 
-# La cible "compilCProduit" est exécutée en tapant la commande "make compilCProduit"
 compilCProduit :
-	@# Précéder chaque commande d'une TABULATION
 	@echo Compilation $(CP)
 	$(GPP) $(SRC)/$(CP).cpp -o $(BIN)/$(CP).o -c
 
-# La cible "testCProduit" est exécutée en tapant la commande "make compilTestCProduit"
 compilTestCProduit :
-	@# Précéder chaque commande d'une TABULATION
 	@echo Compilation $(tCP)
 	$(GPP) $(SRC)/$(tCP).cpp $(BIN)/$(CPB).o $(BIN)/$(CP).o -o $(BIN)/$(tCP).exe
 
-# La cible "deleteAll" est exécutée en tapant la commande "make deleteAll"
+compilCPalette:
+	@echo Compilation $(CPa)
+	$(GPP) $(SRC)/$(CPa).cpp -o $(BIN)/$(CPa).o -c
+
 deleteAll :
-	@# Précéder chaque commande d'une TABULATION
 	@echo suppression du contenu du repertoire ./bin
 	rm -f $(BIN)/*
