@@ -2,9 +2,10 @@
 
 CProduit::CProduit()
 {
-	this->m_Long = rand() % DIM + 1;
-	this->m_Haut = rand() % DIM + 1;
-	this->m_Larg = rand() % DIM + 1;
+	srand(time(NULL));
+	this->m_Long = rand() % (DIM - 1) + 1;
+	this->m_Haut = rand() % (DIM - 1) + 1;
+	this->m_Larg = rand() % (DIM - 1) + 1;
 }
 
 void CProduit::MakeCode(int NumProd, int NumPal)
