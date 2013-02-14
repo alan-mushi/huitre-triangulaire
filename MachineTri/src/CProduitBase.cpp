@@ -24,3 +24,18 @@ void CProduitBase::setCateg( short cat )
 		throw e;
 	}
 }
+
+/*
+ * Change le code du produit.
+ *	dest	Destination a affecter à la palette
+ *		Throws length_error si dest est une chaine vide
+ */
+void CProduitBase::setCode( string code )
+{
+	if ( code.empty() )
+	{
+		length_error e("Le code ne doit pas être une chaine vide.");
+		throw e;
+	}
+	m_Code = code;
+}
