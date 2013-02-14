@@ -11,17 +11,20 @@ void CProduit::MakeCode(int NumProd, int NumPal)
 {
 	ostringstream tmp;
 	tmp << NumProd << this->getCateg() << NumPal;
-	this->m_code = tmp;
+	this->setCode(tmp.str());
 }
 
-ostream& CProduit::operator<<(ostream& os, CProduit& UnProd)
+ostream& operator<<(ostream& os, CProduit& UnProd)
 {
-	os << "Longueur :" << this->m_Long << endl;
-	os << "Largeur :" << this->m_Larg << endl;
-	os << "Hauteur :" << this->m_Haut << endl;
-	os << "Catégorie :" << this->getCateg() << endl;
-	os << "Code :" << this->getCode() << endl;
+	os << "Longueur :" << UnProd.getLong() << endl;
+	os << "Largeur :" << UnProd.getLarg() << endl;
+	os << "Hauteur :" << UnProd.getHaut() << endl;
+	os << "Catégorie :" << UnProd.getCateg() << endl;
+	os << "Code :" << UnProd.getCode() << endl;
+	
+	return os;
 }
+
 CProduit::~CProduit()
 {
 	cout << "Adresse du produit détruit" << this << endl;

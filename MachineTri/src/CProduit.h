@@ -2,10 +2,11 @@
 #define CPRODUIT_H
 
 #include "BiblioStd.h"
+#include "CProduitBase.h"
 
 #define DIM 20
 
-public class CProduit : public CProduitBase
+class CProduit : public CProduitBase
 {
 	private:
 		float m_Long;
@@ -15,6 +16,11 @@ public class CProduit : public CProduitBase
 	public:
 		CProduit();
 		void MakeCode(int NumProd, int NumPal);
-		friend  ostream& operator(ostream& os, CProduit& UnProd);
+		friend ostream& operator<<(ostream& os, CProduit& UnProd);
+		float getLong();
+		float getLarg();
+		float getHaut();
 		~CProduit();
 };
+
+#endif

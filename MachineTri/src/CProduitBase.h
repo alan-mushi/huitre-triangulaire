@@ -14,8 +14,6 @@ class CProduitBase {
 		short getCateg();
 		void setCateg( short cat );
 		string getCode();
-	
-	private:
 		void setCode( string code );
 };
 
