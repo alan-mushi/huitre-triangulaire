@@ -25,7 +25,22 @@ ostream& operator<<(ostream& os, CProduit& UnProd)
 	return os;
 }
 
+float CProduit::getLong()
+{
+	return this->m_Long;
+}
+
+float CProduit::getLarg()
+{
+	return this->m_Haut;
+}
+
+float CProduit::getHaut()
+{
+	return this->m_Larg;
+}
+
 CProduit::~CProduit()
 {
-	cout << "Adresse du produit détruit" << this << endl;
+	cout << "Adresse du produit détruit : " << this << endl;
 }
