@@ -1,8 +1,15 @@
 #include "CMachine.h"
 
-CMachine::CMachine ( int NbCateg, int NbProduitTotal, int NbProdParPalette, string* pLesDest )
+CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string* pLesDest)
 {
-	
+	this->m_Marche = false;
+	this->m_NbCateg = NbCateg;
+	this->m_NbProduitTotal = NbProduitTotal;
+	this->m_NbProdParPalette = NbProdParPalette;
+	this->m_NbPaletteTotal = 1;
+	this->m_NbPalProduites = 0;
+	this->m_NumPalEnCour = 0;
+	//m_pNbProdParCateg = new int[];
 }
 
 bool CMachine::GetMarche()
@@ -62,7 +69,7 @@ CProduit* CMachine::GetProduitEnCour()
 
 void CMachine::SetMarche (bool Marche)
 {
-
+	this->m_Marche = Marche;
 }
 
 bool CMachine::InsertNewProduit ()
