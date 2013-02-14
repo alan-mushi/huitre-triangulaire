@@ -9,9 +9,9 @@
 class CProduit : public CProduitBase
 {
 	private:
-		float m_Long;
-		float m_Larg;
-		float m_Haut;
+		float m_Long; //longueur du produit
+		float m_Larg; //largeur du produit
+		float m_Haut; //hauteur du produit
 
 	public:
 		CProduit();
