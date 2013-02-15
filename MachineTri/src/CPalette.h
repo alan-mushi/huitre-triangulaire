@@ -17,10 +17,10 @@ class CPalette {
 		~CPalette();
 
 		// Pour le moment on n'utilise pas les accesseurs
-		//int GetNbProdParPalette();
-		//short GetNbProdActuels();
-		//string GetDest();
-		//string GetCodePal();
+		int GetNbProdParPalette();
+		short GetNbProdActuels();
+		string GetDest();
+		string GetCodePal();
 		//CProduit** GetProdStockes();
 
 		void MakeCode( int NumPal );

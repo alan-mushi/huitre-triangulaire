@@ -25,6 +25,7 @@ CPalette::CPalette( short nbProd, const string dest )
 	m_pProdStockes = new CProduit*[nbProd];
 	m_Dest = dest;
 	m_NbProdActuels = 0;
+	m_CodePal = "";
 }
 
 /*
@@ -49,11 +50,9 @@ CPalette::~CPalette()
  */
 void CPalette::MakeCode( int NumPal )
 {
-	m_CodePal = "<Palette n° ";
-	m_CodePal += NumPal;
-	m_CodePal += " - Destination : ";
-	m_CodePal += string(m_Dest);
-	m_CodePal += " >" ;
+	stringstream tmp;
+	tmp << "<Palette n# " << NumPal << " - Destination : " << m_Dest << " >" ;
+	m_CodePal = tmp.str();
 }
 
 /*
@@ -95,4 +94,36 @@ CProduit* CPalette::GetProduit( int IndexTab )
 		throw e;
 	}
 	return m_pProdStockes[IndexTab];
+}
+
+/*
+ * Retourne le nombre de produit par palette.
+ */
+int CPalette::GetNbProdParPalette()
+{
+	return m_NbProdParPalette;
+}
+
+/*
+ * Retourne le nombre de produit actuellement stockés dans la palette.
+ */
+short CPalette::GetNbProdActuels()
+{
+	return m_NbProdActuels;
+}
+
+/*
+ * Retourne la destination à laquelle la palette est adressée.
+ */
+string CPalette::GetDest()
+{
+	return m_Dest;
+}
+
+/*
+ * Retourne le code attribué à la palette.
+ */
+string CPalette::GetCodePal()
+{
+	return m_CodePal;
 }

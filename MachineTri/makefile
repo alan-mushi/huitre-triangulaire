@@ -45,7 +45,6 @@ compilCPalette:
 compilTestCPalette:
 	@echo Compilation $(tCPa)
 	$(GPP) $(SRC)/$(tCPa).cpp $(BIN)/$(CPa).o $(BIN)/$(CP).o $(BIN)/$(CPB).o -o $(BIN)/$(tCPa).bin
-	$(BIN)/$(tCPa).bin
 
 deleteAll :
 	@echo suppression du contenu du repertoire ./bin
