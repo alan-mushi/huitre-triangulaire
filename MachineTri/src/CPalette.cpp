@@ -33,7 +33,7 @@ CPalette::CPalette( short nbProd, const string dest )
  */
 CPalette::~CPalette()
 {
-	for ( int i = 0 ; i < m_NbProdParPalette ; i++ )
+	for ( int i = 0 ; i < m_NbProdActuels-1 ; i++ )
 	{
 		(*m_pProdStockes[i]).~CProduit() ;
 	}
