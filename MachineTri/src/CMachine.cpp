@@ -9,12 +9,10 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 	this->m_NbPaletteTotal = 1;
 	this->m_NbPalProduites = 0;
 	this->m_NumPalEnCour = 0;
-	//m_pNbProdParCateg = new int[];
-}
-
-bool CMachine::GetMarche()
-{
-	return this->m_Marche;
+	this->m_pNbProdParCateg = new int[NbCateg];
+	this->m_pPaletteEnCour = new CPalette(NbProdParPalette, pLesDest[0]);
+	this->m_pPalettes = new CPalette[1];
+	this->m_pPalettes[0] = m_pPaletteEnCour;
 }
 
 short CMachine::GetNbCateg()
@@ -74,27 +72,57 @@ void CMachine::SetMarche (bool Marche)
 
 bool CMachine::InsertNewProduit ()
 {
-
+	bool ret = false;
+	if(this->m_Marche) {
+		ret = true;
+		
+	}
+	
+	return ret;
 }
 
 bool CMachine::Process()
 {
-
+	bool ret = false;
+	if(this->m_Marche) {
+		ret = true;
+		
+	}
+	
+	return ret;
 }
 
 bool CMachine::EjectionProduit()
 {
-
+	bool ret = false;
+	if(this->m_Marche) {
+		ret = true;
+		
+	}
+	
+	return ret;
 }
 
 bool CMachine::MarquageProduit()
 {
-
+	bool ret = false;
+	if(this->m_Marche) {
+		ret = true;
+		
+	}
+	
+	return ret;
 }
 
 bool CMachine::AjoutPalette()
 {
-
+	bool ret = false;
+	if(this->m_Marche) {
+		ret = true;
+		
+	}
+	
+	return ret;
 }
 
 void CMachine::Affiche()
