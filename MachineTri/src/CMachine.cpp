@@ -29,6 +29,10 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 	this->m_NbPalProduites = 0;
 	this->m_NumPalEnCour = 0;
 	this->m_pNbProdParCateg = new int[NbCateg];
+	for(int i=0; i<NbCateg; i++)
+	{
+		this->m_pNbProdParCateg[i] = 0;
+	}
 	this->m_pProdEnCour = NULL;
 	if(p_LesDest == NULL)
 	{
@@ -76,7 +80,18 @@ int CMachine::GetNumPalEnCour()
 
 int CMachine::GetNbProd(short Categ)
 {
+	int ret = -1;
 	if((Categ > this->m_NbCateg) || (Categ < 0))
+	{
+		ret = this->m_pNbProdParCateg[Categ];
+	}
+	else
+	{
+		length_error e("Le numéro de catégorie n'est pas correct.");
+		throw e;
+	}
+	
+	return ret;
 }
 
 CPalette* CMachine::GetPalette(int NumPalette)
