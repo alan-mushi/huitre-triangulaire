@@ -113,7 +113,7 @@ CPalette* CMachine::GetPalette(int NumPalette)
 
 CPalette* CMachine::GetPaletteEnCour ()
 {
-
+	return m_pPaletteEnCour;
 }
 
 CProduit* CMachine::GetProduitEnCour()
