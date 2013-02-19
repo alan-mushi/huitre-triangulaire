@@ -3,17 +3,45 @@
 CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string* pLesDest)
 {
 	this->m_Marche = false;
-	this->m_NbCateg = NbCateg;
-	this->m_NbProduitTotal = NbProduitTotal;
-	this->m_NbProdParPalette = NbProdParPalette;
+	
+	if(NbCateg > 0)
+		this->m_NbCateg = NbCateg;
+	else
+	{
+		length_error e("Le nombre de catégorie doit être suppérieur à 0.");
+		throw e;
+	}
+	if(NbProduitTotal > 0)
+		this->m_NbProduitTotal = NbProduitTotal;
+	else
+	{
+		length_error e("Le nombre de produit total doit être supérieur à 0.");
+		throw e;
+	}
+	if(NbProdParPalette > 0)
+		this->m_NbProdParPalette = NbProdParPalette;
+	else
+	{
+		length_error e("Le nombre de produit par palette doit être supérieur à 0.");
+		throw e;	
+	}
 	this->m_NbPaletteTotal = 1;
 	this->m_NbPalProduites = 0;
 	this->m_NumPalEnCour = 0;
 	this->m_pNbProdParCateg = new int[NbCateg];
 	this->m_pProdEnCour = NULL;
+	if(p_LesDest == NULL)
+	{
+		runtime_error e("Les destinations n'ont pas étés correctement définies.");
+		throw e;
+	}
 	this->m_pPaletteEnCour = new CPalette(NbProdParPalette, pLesDest[0]);
-	this->m_pPalettes = new CPalette[1];
+	this->m_pPalettes = new CPalette[NbProdParPalette];
 	this->m_pPalettes[0] = m_pPaletteEnCour;
+	for(int i=1; i < NbProdParPalette; i++)
+	{
+		this->m_pPalettes[i] = NULL;
+	}
 }
 
 short CMachine::GetNbCateg()
@@ -48,7 +76,7 @@ int CMachine::GetNumPalEnCour()
 
 int CMachine::GetNbProd(short Categ)
 {
-
+	if((Categ > this->m_NbCateg) || (Categ < 0))
 }
 
 CPalette* CMachine::GetPalette(int NumPalette)
@@ -65,7 +93,7 @@ CProduit* CMachine::GetProduitEnCour()
 {
 	if(this->m_pProdEnCour == NULL)
 	{
-		bad_typeid e("Il n'y a pas de produit en cours.");
+		runtime_error e("Il n'y a pas de produit en cours.");
 		throw e;
 	}
 	
