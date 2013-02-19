@@ -96,7 +96,19 @@ int CMachine::GetNbProd(short Categ)
 
 CPalette* CMachine::GetPalette(int NumPalette)
 {
-
+	CPalette* ret = NULL;
+	
+	if(NumPalette <= this->m_NbPaletteTotal && NumPalette > 0)
+	{
+		ret = m_pPalettes[NumPalette];
+	}
+	else
+	{
+		length_error e("Le numéro de palette n'est pas correct.");
+		throw e;
+	}
+	
+	return ret;
 }
 
 CPalette* CMachine::GetPaletteEnCour ()
