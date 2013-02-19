@@ -10,6 +10,7 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 	this->m_NbPalProduites = 0;
 	this->m_NumPalEnCour = 0;
 	this->m_pNbProdParCateg = new int[NbCateg];
+	this->m_pProdEnCour = NULL;
 	this->m_pPaletteEnCour = new CPalette(NbProdParPalette, pLesDest[0]);
 	this->m_pPalettes = new CPalette[1];
 	this->m_pPalettes[0] = m_pPaletteEnCour;
@@ -62,7 +63,13 @@ CPalette* CMachine::GetPaletteEnCour ()
 
 CProduit* CMachine::GetProduitEnCour()
 {
-
+	if(this->m_pProdEnCour == NULL)
+	{
+		bad_typeid e("Il n'y a pas de produit en cours.");
+		throw e;
+	}
+	
+	return this->m_pProdEnCour;
 }
 
 void CMachine::SetMarche (bool Marche)
