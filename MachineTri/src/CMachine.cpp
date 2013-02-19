@@ -176,12 +176,26 @@ bool CMachine::MarquageProduit()
 	return ret;
 }
 
+//TODO : la méthode n'est peut être pas terminée : à vérifier
 bool CMachine::AjoutPalette()
 {
 	bool ret = false;
 	if(this->m_Marche) {
-		ret = true;
+		try
+		{
+			this->m_pPaletteEnCour->AddProduit(this->m_pProdEnCour);
+			this->m_NumProdEnCour++;
+		}
+		catch(invalid_argument e)
+		{
+			cout << "Erreur : " << e.what() << endl;
+		}
+		catch(range_error e)
+		{
+			cout << "Erreur : " << e.what() << endl;
+		}
 		
+		ret = true;
 	}
 	
 	return ret;
@@ -206,5 +220,11 @@ void CMachine::Affiche()
 
 CMachine::~CMachine()
 {
-
+	delete this->m_pProdEnCour;
+	for(int i=0; i < NbProdParPalette; i++)
+	{
+		delete this->m_pPalettes[i];
+	}
+	delete this->m_pPalettes;
+	delete this->m_pLesDest;
 }
