@@ -103,12 +103,90 @@ int main()
 	else
 		cout << "Test failed : le nombre de palette produite n'est pas correct" << endl;
 	
-	cout << "\t[*] Test de GetNumPalEnCour ... " << endl;
+	cout << "\t[*] Test de GetNumPalEnCour ... ";
 	if((*m1).GetNumPalEnCour() == 0)
 		cout << "Test réussi" << endl;
 	else
-		cout << "Test failed : le nombre de palette en cours n'est pas correct" << endl;
+		cout << "Test failed : le numéro de la palette en cours n'est pas correct" << endl;
 		
+	cout << "\t[*] Test de GetNbProd ... ";
+	try
+	{
+		if((*m1).GetNbProd(1) == 1 || (*m1).GetNbProd(1) == 0)
+			cout << "Test réussi" << endl;
+		else
+			cout << "Test failed : le nombre de produit n'est pas correct dans la 1ere catégorie" << endl;
+	}
+	catch(length_error e)
+	{
+		cout << "Test failed : borne non respectée : " << e.what() << endl;
+	}
+		
+	cout << "\t[*] Test de GetPalette ... ";
+	try
+	{
+		if((*m1).GetPalette(1) != NULL)
+			cout << "Test réussi" << endl;
+		else
+			cout << "Test failed : " e.what() << endl;
+	}
+	catch(length_error e)
+	{
+		cout << "Test failed : borne non respectée : " << e.what() << endl;
+	}
 	
+	cout << "\t[*] Test de GetPaletteEnCour ... ";
+	if((*m1).GetPaletteEnCour() != NULL)
+		cout << "Test réussi" << endl;
+	else
+		cout << "Test failed : la palette en cour vaut NULL" << endl;
 		
+	if((*m1).GetProduitEnCour() == NULL)
+		cout << "Test réussi" << endl;
+	else
+		cout << "Test failed : il y a un produit en cours" << endl;
+	
+	m1.SetMarche(true);
+	cout << "Insertion d'un produit : test de InsertNewProduit ... " << endl;
+	if((*m1).InsertNewProduit())
+		cout << "Test réussi" << endl;
+	else
+		cout << "Test failed" << endl;
+		
+	cout << "Test de Process ... " << endl;
+	if((*m1).Process())
+		cout << "Test réussi" << endl;
+	else
+		cout << "Test failed : l'assignation d'une catégorie a échouée" << endl;
+		
+	cout << "Test de EjectionProduit ... " << endl;
+	if((*m1).EjectionProduit())
+		cout << "Test réussi" << endl;
+	else
+		cout << "Test failed : le produit en cour n'a pas été éjecté" << endl;
+		
+	cout << "Test de MarquageProduit ... " << endl;
+	if((*m1).MarquageProduit())
+	cout << "Test réussi" << endl;
+	else
+		cout << "Test failed : le marquage n'a pas été fait." << endl;
+		
+	cout << "Test de AjoutPalette ... " << endl;
+	try
+	{
+		if(m1.AjoutPalette())
+			cout << "Test réussi" << endl;
+		else
+			cout << "Test failed : La palette n'a pas été ajoutée" << endl;
+	}
+	catch(invalid_argument e)
+	{
+		cout << "Test failed : " << e.what() << endl;
+	}
+	catch(range_error e)
+	{
+		cout << "Test failed : " << e.what() << endl;
+	}
+	
+	m1.affiche();
 }

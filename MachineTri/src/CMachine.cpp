@@ -291,8 +291,6 @@ bool CMachine::MarquageProduit()
 	return ret;
 }
 
-//TODO : la méthode n'est peut être pas terminée : à vérifier
-
 /**
 * Permet d'ajouter une palette
 * @return Retourne false si la machine n'est pas en marche
