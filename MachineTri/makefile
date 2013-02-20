@@ -14,6 +14,8 @@ CPa=CPalette
 tCPa=testCPalette
 CM=CMachine
 tCM=testCMachine
+t=tri
+k=CKeyboard
 
 # Test de la classe CProduit
 # Compilation du lanceur testCProduit, pour cela (l'ordre de compilation est important en C++) :
@@ -30,9 +32,15 @@ testCPalette: deleteAll compilCProduitBase compilCProduit compilCPalette compilT
 
 testCMachine: deleteAll compilCMachine compilTestCMachine
 
+compilTri: deleteAll compilCProduitBase compilCProduit compilCPalette compilCMachine compilKeyboard
+
 compilCProduitBase:
 	@echo Compilation $(CPB)
 	$(GPP) $(SRC)/$(CPB).cpp -o $(BIN)/$(CPB).o -c
+	
+compilKeyboard:
+	@echo Compilation $(k)
+	$(GPP) $(SRC)/$(k).cpp -o $(BIN)/$(k).o -c
 
 compilCProduit:
 	@echo Compilation $(CP)
@@ -57,6 +65,10 @@ compilCMachine: compilCProduitBase compilCProduit compilCPalette
 compilTestCMachine:
 	@echo Compilation $(tCM)
 	$(GPP) $(SRC)/$(tCM).cpp $(BIN)/$(CPa).o $(BIN)/$(CP).o $(BIN)/$(CPB).o $(BIN)/$(CM).o -o $(BIN)/$(tCM).bin
+
+compilTri:
+	@echo Compilation $(t)
+	$(GPP) $(SRC)/$(t).cpp $(BIN)/$(CPa).o $(BIN)/$(CP).o $(BIN)/$(CPB).o $(BIN)/$(CM).o -o $(BIN)/$(t).bin
 
 deleteAll :
 	@echo suppression du contenu du repertoire ./bin

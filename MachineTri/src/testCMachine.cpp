@@ -194,5 +194,6 @@ int main()
 		cout << "Test failed : " << e.what() << endl;
 	}
 	
+	cout << "[*] Affichage des informations ... ";
 	(*m1).Affiche();
 }

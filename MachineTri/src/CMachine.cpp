@@ -232,6 +232,7 @@ bool CMachine::InsertNewProduit ()
 			ret = true;
 			CProduit* nouveauProduit = new CProduit();
 			this->m_pProdEnCour = nouveauProduit;
+			this->Process();
 			
 			if(this->m_NbProdParPalette < this->m_pPaletteEnCour->GetNbProdActuels())
 				this->m_pPaletteEnCour->AddProduit(nouveauProduit);
@@ -255,7 +256,9 @@ bool CMachine::Process()
 		try
 		{
 			srand(time(NULL));
-			this->m_pProdEnCour->setCateg((short)(rand() % (this->m_NbCateg - 1) + 1));
+			int alea = (rand() % (this->m_NbCateg - 1) + 1);
+			cout << "Coucou ::" << alea << endl;
+			this->m_pProdEnCour->setCateg(alea);
 			this->m_pNbProdParCateg[this->m_pProdEnCour->getCateg()]++;
 		}
 		catch(range_error e)
