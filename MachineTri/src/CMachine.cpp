@@ -45,13 +45,16 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 		this->m_pNbProdParCateg[i] = 0;
 	}
 	this->m_pProdEnCour = NULL;
-	if(p_LesDest == NULL)
+	if(pLesDest == NULL)
 	{
 		runtime_error e("Les destinations n'ont pas étés correctement définies.");
 		throw e;
 	}
+	// DEBUG
+	// CPalette( short nbProd = NbProdParPalette , const string dest = pLesDest[0]);
+	// DEBUG
 	this->m_pPaletteEnCour = new CPalette(NbProdParPalette, pLesDest[0]);
-	this->m_pPalettes = new CPalette[NbProdParPalette];
+	this->m_pPalettes = new CPalette*[NbProdParPalette];
 	this->m_pPalettes[0] = m_pPaletteEnCour;
 	for(int i=1; i < NbProdParPalette; i++)
 	{
@@ -315,9 +318,9 @@ void CMachine::Affiche()
 
 	for (int i=0; i<=m_NumPalEnCour; i++) 
 	{
-		cout << "\n\rPalette --> " << i << "\tCode : " << m_pPalettes[i]->GetCode() << endl;
+		cout << "\n\rPalette --> " << i << "\tCode : " << m_pPalettes[i]->GetCodePal() << endl;
 
-		for (int j=0; j<m_pPalettes[i]->GetNbProduitActuels(); j++) 
+		for (int j=0; j<m_pPalettes[i]->GetNbProdActuels(); j++) 
 		{
 			cout << "\r\tProduit -> " << j << endl;
 			// Affiche les caractéristiques du produit
@@ -332,7 +335,7 @@ void CMachine::Affiche()
 CMachine::~CMachine()
 {
 	delete this->m_pProdEnCour;
-	for(int i=0; i < NbProdParPalette; i++)
+	for(int i=0; i < m_NbProdParPalette; i++)
 	{
 		delete this->m_pPalettes[i];
 	}
