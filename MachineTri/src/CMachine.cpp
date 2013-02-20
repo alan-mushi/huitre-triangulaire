@@ -25,8 +25,7 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 		length_error e("Le nombre de produit par palette doit être supérieur à 0.");
 		throw e;	
 	}
-	this->m_NbPaletteTotal = 1;
-	this->m_NbPalProduites = 0;
+	this->m_NbPaletteTotal = NbProduitTotal / NbProdParPalette;
 	this->m_NumPalEnCour = 0;
 	this->m_pNbProdParCateg = new int[NbCateg];
 	for(int i=0; i<NbCateg; i++)
@@ -136,8 +135,24 @@ bool CMachine::InsertNewProduit ()
 {
 	bool ret = false;
 	if(this->m_Marche) {
-		ret = true;
-		
+		int nbActuel = 0;
+		for(int i=0; i<this->m_NbPaletteTotal; i++)
+		{
+			nbActuel += this->m_pPalettes[i]->GetNbProdActuels();
+		}
+		if(this->m_NbProduitTotal > nbActuel)
+		{
+			ret = true;
+			if(this->m_NbProdParPalette < this->m_pPaletteEnCour->GetNbProdActuels())
+			{
+				CProduit* nouveauProduit = new CProduit();
+				this->m_pProdEnCour = nouveauProduit;
+			}
+			else
+			{
+				this->AjoutPalette();
+			}
+		}
 	}
 	
 	return ret;
