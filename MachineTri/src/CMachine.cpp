@@ -6,12 +6,18 @@
 * @param NbProduitTotal Le nombre de produit total à enregistrer
 * @param NbProdParPalette Le nombre de produit par palette
 * @param pLesDest Un tableau de string contenant les destinations des différentes palettes
-* @throw length_error length_error est émis si <code>NbCateg</code>, <code>NbProduitTotal</code> ou <code>NbProdParPalette</code> est inférieur à 0
+* @throw length_error length_error est émis si <code>NbCateg</code>, <code>NbProduitTotal</code> ou <code>NbProdParPalette</code> est inférieur à 0. Emis aussi si le nombre de produit total est < que le nombre de produit par palette
 * @throw runtime_error Emis si les destinatations sont égal à NULL
 */
 CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string* pLesDest)
 {
 	this->m_Marche = false;
+	
+	if(NbProdParPalette > NbProduitTotal)
+	{
+		length_error e("Le nombre de produit par palette ne peut pas être supérieur au nombre de produit total");
+		throw e;
+	}
 	
 	if(NbCateg > 0)
 		this->m_NbCateg = NbCateg;
