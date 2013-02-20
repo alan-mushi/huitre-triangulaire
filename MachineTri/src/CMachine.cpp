@@ -163,7 +163,8 @@ bool CMachine::Process()
 	bool ret = false;
 	if(this->m_Marche) {
 		ret = true;
-		
+		srand(time(NULL));
+		this->m_pProdEnCour->setCateg((short)(rand() % (this->m_NbCateg - 1) + 1));
 	}
 	
 	return ret;
