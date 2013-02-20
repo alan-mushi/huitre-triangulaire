@@ -102,4 +102,13 @@ int main()
 		cout << "Test réussi" << endl;
 	else
 		cout << "Test failed : le nombre de palette produite n'est pas correct" << endl;
+	
+	cout << "\t[*] Test de GetNumPalEnCour ... " << endl;
+	if((*m1).GetNumPalEnCour() == 0)
+		cout << "Test réussi" << endl;
+	else
+		cout << "Test failed : le nombre de palette en cours n'est pas correct" << endl;
+		
+	
+		
 }

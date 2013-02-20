@@ -247,6 +247,7 @@ bool CMachine::Process()
 		{
 			srand(time(NULL));
 			this->m_pProdEnCour->setCateg((short)(rand() % (this->m_NbCateg - 1) + 1));
+			this->m_pNbProdParCateg[this->m_pProdEnCour->getCateg()]++;
 		}
 		catch(range_error e)
 		{
