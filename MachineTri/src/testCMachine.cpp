@@ -141,37 +141,43 @@ int main()
 	else
 		cout << "Test failed : la palette en cour vaut NULL" << endl;
 		
-	if((*m1).GetProduitEnCour() == NULL)
+	cout << "\t[*] Test de GetProduitEnCour ... ";
+	try
+	{
+		CProduit* prod = (*m1).GetProduitEnCour();
+		cout << "Test failed : un produit est en cours alors qu'il ne devrait pas y en avoir : " << prod << endl;
+	}
+	catch(runtime_error e)
+	{
 		cout << "Test réussi" << endl;
-	else
-		cout << "Test failed : il y a un produit en cours" << endl;
+	}
 	
 	(*m1).SetMarche(true);
-	cout << "Insertion d'un produit : test de InsertNewProduit ... " << endl;
+	cout << "[*] Insertion d'un produit : test de InsertNewProduit ... " << endl;
 	if((*m1).InsertNewProduit())
 		cout << "Test réussi" << endl;
 	else
 		cout << "Test failed" << endl;
 		
-	cout << "Test de Process ... " << endl;
+	cout << "[*] Test de Process ... " << endl;
 	if((*m1).Process())
 		cout << "Test réussi" << endl;
 	else
 		cout << "Test failed : l'assignation d'une catégorie a échouée" << endl;
 		
-	cout << "Test de EjectionProduit ... " << endl;
+	cout << "[*] Test de EjectionProduit ... " << endl;
 	if((*m1).EjectionProduit())
 		cout << "Test réussi" << endl;
 	else
 		cout << "Test failed : le produit en cour n'a pas été éjecté" << endl;
 		
-	cout << "Test de MarquageProduit ... " << endl;
+	cout << "[*] Test de MarquageProduit ... " << endl;
 	if((*m1).MarquageProduit())
 	cout << "Test réussi" << endl;
 	else
 		cout << "Test failed : le marquage n'a pas été fait." << endl;
 		
-	cout << "Test de AjoutPalette ... " << endl;
+	cout << "[*] Test de AjoutPalette ... " << endl;
 	try
 	{
 		if((*m1).AjoutPalette())

@@ -72,9 +72,9 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 	{
 		cout << "Erreur d'initialisation pour this->m_pPaletteEnCour : " << e.what() << endl;
 	}
-	this->m_pPalettes = new CPalette*[NbProdParPalette];
+	this->m_pPalettes = new CPalette*[this->m_NbPaletteTotal];
 	this->m_pPalettes[0] = m_pPaletteEnCour;
-	for(int i=1; i < NbProdParPalette; i++)
+	for(int i=1; i < this->m_NbPaletteTotal; i++)
 	{
 		this->m_pPalettes[i] = NULL;
 	}
@@ -169,7 +169,7 @@ CPalette* CMachine::GetPalette(int NumPalette)
 	
 	if(NumPalette <= this->m_NbPaletteTotal && NumPalette > 0)
 	{
-		ret = m_pPalettes[NumPalette];
+		ret = m_pPalettes[NumPalette-1];
 	}
 	else
 	{
@@ -221,27 +221,40 @@ void CMachine::SetMarche (bool Marche)
 bool CMachine::InsertNewProduit ()
 {
 	bool ret = false;
+	cout << "ok1" << endl;
 	if(this->m_Marche) {
+		cout << "ok2" << endl;
 		int nbActuel = 0;
-		for(int i=0; i<this->m_NbPaletteTotal; i++)
+		cout << "ok3" << endl;
+		for(int i=0; i<this->m_NbPaletteTotal-1; i++)
 		{
+			cout << "ok4" << endl;
 			nbActuel += this->m_pPalettes[i]->GetNbProdActuels();
+			cout << "ok5" << endl;
 		}
+		cout << "ok6" << endl;
 		if(this->m_NbProduitTotal > nbActuel)
 		{
+			cout << "ok7" << endl;
 			ret = true;
+			cout << "ok8" << endl;
 			if(this->m_NbProdParPalette < this->m_pPaletteEnCour->GetNbProdActuels())
 			{
+				cout << "ok9" << endl;
 				CProduit* nouveauProduit = new CProduit();
+				cout << "ok10" << endl;
 				this->m_pProdEnCour = nouveauProduit;
+				cout << "ok11" << endl;
 			}
 			else
 			{
+				cout << "ok12" << endl;
 				this->AjoutPalette();
+				cout << "ok13" << endl;
 			}
 		}
 	}
-	
+	cout << "ok14" << endl;
 	return ret;
 }
 
