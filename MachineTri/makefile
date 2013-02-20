@@ -32,13 +32,13 @@ testCPalette: deleteAll compilCProduitBase compilCProduit compilCPalette compilT
 
 testCMachine: deleteAll compilCMachine compilTestCMachine
 
-compilTri: deleteAll compilCProduitBase compilCProduit compilCPalette compilCMachine compilKeyboard
+testTri: deleteAll compilCProduitBase compilCProduit compilCPalette compilCMachine compilCKeyboard compilTestTri
 
 compilCProduitBase:
 	@echo Compilation $(CPB)
 	$(GPP) $(SRC)/$(CPB).cpp -o $(BIN)/$(CPB).o -c
 	
-compilKeyboard:
+compilCKeyboard:
 	@echo Compilation $(k)
 	$(GPP) $(SRC)/$(k).cpp -o $(BIN)/$(k).o -c
 
@@ -66,9 +66,9 @@ compilTestCMachine:
 	@echo Compilation $(tCM)
 	$(GPP) $(SRC)/$(tCM).cpp $(BIN)/$(CPa).o $(BIN)/$(CP).o $(BIN)/$(CPB).o $(BIN)/$(CM).o -o $(BIN)/$(tCM).bin
 
-compilTri:
+compilTestTri:
 	@echo Compilation $(t)
-	$(GPP) $(SRC)/$(t).cpp $(BIN)/$(CPa).o $(BIN)/$(CP).o $(BIN)/$(CPB).o $(BIN)/$(CM).o -o $(BIN)/$(t).bin
+	$(GPP) $(SRC)/$(t).cpp $(BIN)/$(CPa).o $(BIN)/$(CP).o $(BIN)/$(CPB).o $(BIN)/$(CM).o $(BIN)/$(k).o -o $(BIN)/$(t).bin
 
 deleteAll :
 	@echo suppression du contenu du repertoire ./bin
