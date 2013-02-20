@@ -1,5 +1,14 @@
 #include "CMachine.h"
 
+/**
+* Constructeur 
+* @param NbCateg Le nombre de catégorie
+* @param NbProduitTotal Le nombre de produit total à enregistrer
+* @param NbProdParPalette Le nombre de produit par palette
+* @param pLesDest Un tableau de string contenant les destinations des différentes palettes
+* @throw length_error length_error est émis si <code>NbCateg</code>, <code>NbProduitTotal</code> ou <code>NbProdParPalette</code> est inférieur à 0
+* @throw runtime_error Emis si les destinatations sont égal à NULL
+*/
 CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string* pLesDest)
 {
 	this->m_Marche = false;
@@ -47,40 +56,70 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 	}
 }
 
+/**
+* Retourne le nombre de catégorie pour la machine
+* @return Le nombre de catégorie
+*/
 short CMachine::GetNbCateg()
 {
 	return this->m_NbCateg;
 }
 
+/**
+* Retourne le nombre total de produit
+* @return Le nombre total de produit
+*/
 int CMachine::GetNbTotalProd()
 {
 	return this->m_NbProduitTotal;
 }
 
+/**
+* Retourne le nombre de produit par palette
+* @return Le nombre de produit par palette
+*/
 short CMachine::GetNbProdParPalette()
 {
 	return this->m_NbProdParPalette;
 }
 
+/**
+* Retourne le nombre total de palette
+* @return Le nombre total de palette
+*/
 int CMachine::GetNbTotalPal()
 {
 	return this->m_NbPaletteTotal;
 }
 
+/**
+* Retourne le nombre de palettes produite actuellement
+* @return Le nombre de palette produite
+*/
 int CMachine::GetNbPalProduites()
 {
 	return this->m_NbPalProduites;
 }
 
+/**
+* Retourne le numéro de la palette en cours
+* @return Le numéro de la palette en cours
+*/
 int CMachine::GetNumPalEnCour()
 {
 	return this->m_NumPalEnCour;
 }
 
+/**
+* Retourne le nombre de produit par catégorie
+* @param Categ Le numéro de la catégorie pour laquelle il faut compter le nombre de produit
+* @return Le nombre de produit pour la catégorie passée en paramètre
+* @throw length_error Emis si <code>Categ</code> n'est pas entre 0 et <code>m_NbCateg</code>
+*/
 int CMachine::GetNbProd(short Categ)
 {
 	int ret = -1;
-	if((Categ > this->m_NbCateg) || (Categ < 0))
+	if(!(Categ > this->m_NbCateg) && !(Categ < 0))
 	{
 		ret = this->m_pNbProdParCateg[Categ];
 	}
@@ -93,6 +132,12 @@ int CMachine::GetNbProd(short Categ)
 	return ret;
 }
 
+/**
+* Retourne un pointeur vers une palette en fonction de son numéro de palette
+* @param NumPalette Le numéro de la palette à sélectionner
+* @return La palette sélectionnée
+* @throw length_error Emis si NumPalette n'est pas compris entre 0 et le nombre de palette totale
+*/
 CPalette* CMachine::GetPalette(int NumPalette)
 {
 	CPalette* ret = NULL;
@@ -110,11 +155,20 @@ CPalette* CMachine::GetPalette(int NumPalette)
 	return ret;
 }
 
+/**
+* Retourne un pointeur vers la palette en cours
+* @return Un pointeur vers la palette en cours
+*/
 CPalette* CMachine::GetPaletteEnCour ()
 {
 	return m_pPaletteEnCour;
 }
 
+/**
+* Retourne un pointeur vers le produit en cours
+* @return Le pointeur vers le produit en cours
+* @throw runtime_error Emis si il n'y a pas de produit en cours (<code>this->m_pProdEnCour == NULL</code>)
+*/
 CProduit* CMachine::GetProduitEnCour()
 {
 	if(this->m_pProdEnCour == NULL)
@@ -126,11 +180,19 @@ CProduit* CMachine::GetProduitEnCour()
 	return this->m_pProdEnCour;
 }
 
+/**
+* Met en marche ou arrête la machine
+* @param Marche Mettre à true pour mettre en marche et false pour arrêter la machine
+*/
 void CMachine::SetMarche (bool Marche)
 {
 	this->m_Marche = Marche;
 }
 
+/**
+* Insère un nouveau produit
+* @return True si l'insertion a fonctionné, false sinon. Renvoie false si la machine est arrêtée
+*/
 bool CMachine::InsertNewProduit ()
 {
 	bool ret = false;
@@ -158,18 +220,33 @@ bool CMachine::InsertNewProduit ()
 	return ret;
 }
 
+/**
+* Assigne une catégorie aléatoirement au produit en cours
+* @return Retourne false si la machine n'est pas en marche
+*/
 bool CMachine::Process()
 {
 	bool ret = false;
 	if(this->m_Marche) {
 		ret = true;
-		srand(time(NULL));
-		this->m_pProdEnCour->setCateg((short)(rand() % (this->m_NbCateg - 1) + 1));
+		try
+		{
+			srand(time(NULL));
+			this->m_pProdEnCour->setCateg((short)(rand() % (this->m_NbCateg - 1) + 1));
+		}
+		catch(range_error e)
+		{
+			cout << "Erreur : " << e.what() << endl;
+		}
 	}
 	
 	return ret;
 }
 
+/**
+* Permet d'éjecter le produit en cours
+* @return Retourne false si la machine n'est pas en marche
+*/
 bool CMachine::EjectionProduit()
 {
 	bool ret = false;
@@ -181,6 +258,10 @@ bool CMachine::EjectionProduit()
 	return ret;
 }
 
+/**
+* Définit le code du produit une fois la catégorie et le numero de palette connue
+* @return Retourne false si la machine n'est pas en marche
+*/
 bool CMachine::MarquageProduit()
 {
 	bool ret = false;
@@ -193,6 +274,11 @@ bool CMachine::MarquageProduit()
 }
 
 //TODO : la méthode n'est peut être pas terminée : à vérifier
+
+/**
+* Permet d'ajouter une palette
+* @return Retourne false si la machine n'est pas en marche
+*/
 bool CMachine::AjoutPalette()
 {
 	bool ret = false;
@@ -217,6 +303,9 @@ bool CMachine::AjoutPalette()
 	return ret;
 }
 
+/**
+* Affiche l'état des éléments de la machine
+*/
 void CMachine::Affiche()
 {
 	cout << "\nNbre de palettes complètes : " << GetNbPalProduites() << endl;
@@ -234,6 +323,9 @@ void CMachine::Affiche()
 	}
 }
 
+/**
+* Destructeur
+*/
 CMachine::~CMachine()
 {
 	delete this->m_pProdEnCour;
