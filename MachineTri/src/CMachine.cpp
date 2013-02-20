@@ -221,40 +221,25 @@ void CMachine::SetMarche (bool Marche)
 bool CMachine::InsertNewProduit ()
 {
 	bool ret = false;
-	cout << "ok1" << endl;
 	if(this->m_Marche) {
-		cout << "ok2" << endl;
 		int nbActuel = 0;
-		cout << "ok3" << endl;
 		for(int i=0; i<this->m_NbPaletteTotal-1; i++)
 		{
-			cout << "ok4" << endl;
 			nbActuel += this->m_pPalettes[i]->GetNbProdActuels();
-			cout << "ok5" << endl;
 		}
-		cout << "ok6" << endl;
 		if(this->m_NbProduitTotal > nbActuel)
 		{
-			cout << "ok7" << endl;
 			ret = true;
-			cout << "ok8" << endl;
+			CProduit* nouveauProduit = new CProduit();
+			this->m_pProdEnCour = nouveauProduit;
+			
 			if(this->m_NbProdParPalette < this->m_pPaletteEnCour->GetNbProdActuels())
-			{
-				cout << "ok9" << endl;
-				CProduit* nouveauProduit = new CProduit();
-				cout << "ok10" << endl;
-				this->m_pProdEnCour = nouveauProduit;
-				cout << "ok11" << endl;
-			}
+				this->m_pPaletteEnCour->AddProduit(nouveauProduit);
 			else
-			{
-				cout << "ok12" << endl;
 				this->AjoutPalette();
-				cout << "ok13" << endl;
-			}
 		}
 	}
-	cout << "ok14" << endl;
+	
 	return ret;
 }
 
@@ -322,9 +307,10 @@ bool CMachine::MarquageProduit()
 bool CMachine::AjoutPalette()
 {
 	bool ret = false;
-	if(this->m_Marche) {
+	if(this->m_Marche) 
+	{
 		try
-		{
+		{	
 			this->m_pPaletteEnCour->AddProduit(this->m_pProdEnCour);
 			this->m_NumProdEnCour++;
 		}

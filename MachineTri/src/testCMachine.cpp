@@ -153,31 +153,31 @@ int main()
 	}
 	
 	(*m1).SetMarche(true);
-	cout << "[*] Insertion d'un produit : test de InsertNewProduit ... " << endl;
+	cout << "[*] Insertion d'un produit : test de InsertNewProduit ... ";
 	if((*m1).InsertNewProduit())
 		cout << "Test réussi" << endl;
 	else
-		cout << "Test failed" << endl;
+		cout << "Test failed : la machine n'est pas en fonctionnement" << endl;
 		
-	cout << "[*] Test de Process ... " << endl;
+	cout << "[*] Test de Process ... ";
 	if((*m1).Process())
 		cout << "Test réussi" << endl;
 	else
 		cout << "Test failed : l'assignation d'une catégorie a échouée" << endl;
 		
-	cout << "[*] Test de EjectionProduit ... " << endl;
+	cout << "[*] Test de EjectionProduit ... ";
 	if((*m1).EjectionProduit())
 		cout << "Test réussi" << endl;
 	else
 		cout << "Test failed : le produit en cour n'a pas été éjecté" << endl;
 		
-	cout << "[*] Test de MarquageProduit ... " << endl;
+	cout << "[*] Test de MarquageProduit ... ";
 	if((*m1).MarquageProduit())
 	cout << "Test réussi" << endl;
 	else
 		cout << "Test failed : le marquage n'a pas été fait." << endl;
 		
-	cout << "[*] Test de AjoutPalette ... " << endl;
+	cout << "[*] Test de AjoutPalette ... ";
 	try
 	{
 		if((*m1).AjoutPalette())
