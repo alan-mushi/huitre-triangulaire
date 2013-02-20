@@ -13,6 +13,7 @@ CPB=CProduitBase
 CPa=CPalette
 tCPa=testCPalette
 CM=CMachine
+tCM=testCMachine
 
 # Test de la classe CProduit
 # Compilation du lanceur testCProduit, pour cela (l'ordre de compilation est important en C++) :
@@ -23,21 +24,23 @@ CM=CMachine
 
 default: deleteAll compilCProduitBase compilCProduit compilCPalette
 
-testCProduit : deleteAll compilCProduitBase compilCProduit compilTestCProduit
+testCProduit: deleteAll compilCProduitBase compilCProduit compilTestCProduit
 
-testCPalette : deleteAll compilCProduitBase compilCProduit compilCPalette compilTestCPalette
+testCPalette: deleteAll compilCProduitBase compilCProduit compilCPalette compilTestCPalette
 
-compilCProduitBase :
+testCMachine: deleteAll compilCMachine compilTestCMachine
+
+compilCProduitBase:
 	@echo Compilation $(CPB)
 	$(GPP) $(SRC)/$(CPB).cpp -o $(BIN)/$(CPB).o -c
 
-compilCProduit :
+compilCProduit:
 	@echo Compilation $(CP)
 	$(GPP) $(SRC)/$(CP).cpp -o $(BIN)/$(CP).o -c
 
-compilTestCProduit :
+compilTestCProduit:
 	@echo Compilation $(tCP)
-	$(GPP) $(SRC)/$(tCP).cpp $(BIN)/$(CPB).o $(BIN)/$(CP).o -o $(BIN)/$(tCP).exe
+	$(GPP) $(SRC)/$(tCP).cpp $(BIN)/$(CPB).o $(BIN)/$(CP).o -o $(BIN)/$(tCP).bin
 
 compilCPalette:
 	@echo Compilation $(CPa)
@@ -47,9 +50,13 @@ compilTestCPalette:
 	@echo Compilation $(tCPa)
 	$(GPP) $(SRC)/$(tCPa).cpp $(BIN)/$(CPa).o $(BIN)/$(CP).o $(BIN)/$(CPB).o -o $(BIN)/$(tCPa).bin
 
-compilCMachine: deleteAll compilCProduitBase compilCProduit compilCPalette
+compilCMachine: compilCProduitBase compilCProduit compilCPalette
 	@echo Compilation $(CM)
 	$(GPP) $(SRC)/$(CM).cpp -o $(BIN)/$(CM).o -c
+
+compilTestCMachine:
+	@echo Compilation $(tCM)
+	$(GPP) $(SRC)/$(tCM).cpp $(BIN)/$(CPa).o $(BIN)/$(CP).o $(BIN)/$(CPB).o $(BIN)/$(CM).o -o $(BIN)/$(tCM).bin
 
 deleteAll :
 	@echo suppression du contenu du repertoire ./bin
