@@ -60,7 +60,18 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 	// DEBUG
 	// CPalette( short nbProd = NbProdParPalette , const string dest = pLesDest[0]);
 	// DEBUG
-	this->m_pPaletteEnCour = new CPalette(NbProdParPalette, pLesDest[0]);
+	try
+	{
+		this->m_pPaletteEnCour = new CPalette(NbProdParPalette, pLesDest[0]);
+	}
+	catch(range_error e)
+	{
+		cout << "Erreur d'initialisation pour this->m_pPaletteEnCour : " << e.what() << endl;
+	}
+	catch(length_error e)
+	{
+		cout << "Erreur d'initialisation pour this->m_pPaletteEnCour : " << e.what() << endl;
+	}
 	this->m_pPalettes = new CPalette*[NbProdParPalette];
 	this->m_pPalettes[0] = m_pPaletteEnCour;
 	for(int i=1; i < NbProdParPalette; i++)
