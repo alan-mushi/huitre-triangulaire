@@ -128,7 +128,7 @@ int main()
 		if((*m1).GetPalette(1) != NULL)
 			cout << "Test réussi" << endl;
 		else
-			cout << "Test failed : " e.what() << endl;
+			cout << "Test failed : la méthode a renvoyé NULL" << endl;
 	}
 	catch(length_error e)
 	{
@@ -146,7 +146,7 @@ int main()
 	else
 		cout << "Test failed : il y a un produit en cours" << endl;
 	
-	m1.SetMarche(true);
+	(*m1).SetMarche(true);
 	cout << "Insertion d'un produit : test de InsertNewProduit ... " << endl;
 	if((*m1).InsertNewProduit())
 		cout << "Test réussi" << endl;
@@ -174,7 +174,7 @@ int main()
 	cout << "Test de AjoutPalette ... " << endl;
 	try
 	{
-		if(m1.AjoutPalette())
+		if((*m1).AjoutPalette())
 			cout << "Test réussi" << endl;
 		else
 			cout << "Test failed : La palette n'a pas été ajoutée" << endl;
@@ -188,5 +188,5 @@ int main()
 		cout << "Test failed : " << e.what() << endl;
 	}
 	
-	m1.affiche();
+	(*m1).Affiche();
 }
