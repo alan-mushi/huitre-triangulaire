@@ -87,7 +87,7 @@ class CMachine {
 	// que RAND_MAX est une constante déjà déclarée et connue).
 	bool Process ();
 	  
-	// Met à jour le tableau des catégories m_NbProdParCateg suivant la catégorie à laquelle appartient 
+	// Met à jour le tableau des catégories m_pNbProdParCateg suivant la catégorie à laquelle appartient 
 	// le nouveau produit.
 	bool EjectionProduit ();
 	  
