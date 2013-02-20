@@ -12,6 +12,7 @@
 CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string* pLesDest)
 {
 	this->m_Marche = false;
+	m_NbPalProduites = 0;
 	
 	if(NbProdParPalette > NbProduitTotal)
 	{
@@ -42,7 +43,7 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 	}
 	this->m_NbPaletteTotal = NbProduitTotal / NbProdParPalette;
 	if((NbProduitTotal % NbProdParPalette) > 0)
-		this->NbPaletteTotal++;
+		this->m_NbPaletteTotal++;
 		
 	this->m_NumPalEnCour = 0;
 	this->m_pNbProdParCateg = new int[NbCateg];
@@ -133,7 +134,8 @@ int CMachine::GetNbProd(short Categ)
 	int ret = -1;
 	if(!(Categ > this->m_NbCateg) && !(Categ < 0))
 	{
-		ret = this->m_pNbProdParCateg[Categ];
+		// -1 pour aligner sur le tableau (comme il commence a l'indice 0)
+		ret = this->m_pNbProdParCateg[Categ-1];
 	}
 	else
 	{
@@ -264,7 +266,10 @@ bool CMachine::EjectionProduit()
 	bool ret = false;
 	if(this->m_Marche) {
 		ret = true;
-		
+		short currentProdCateg = (*m_pProdEnCour).getCateg();
+		// -1 pour aligner sur le tableau
+		currentProdCateg--;
+		m_pNbProdParCateg[currentProdCateg]--;
 	}
 	
 	return ret;
@@ -279,7 +284,7 @@ bool CMachine::MarquageProduit()
 	bool ret = false;
 	if(this->m_Marche) {
 		ret = true;
-		
+		(*m_pProdEnCour).MakeCode( m_NumProdEnCour, m_NumPalEnCour );
 	}
 	
 	return ret;
