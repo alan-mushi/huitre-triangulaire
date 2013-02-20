@@ -35,6 +35,9 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 		throw e;	
 	}
 	this->m_NbPaletteTotal = NbProduitTotal / NbProdParPalette;
+	if((NbProduitTotal % NbProdParPalette) > 0)
+		this->NbPaletteTotal++;
+		
 	this->m_NumPalEnCour = 0;
 	this->m_pNbProdParCateg = new int[NbCateg];
 	for(int i=0; i<NbCateg; i++)
