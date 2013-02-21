@@ -229,21 +229,18 @@ bool CMachine::InsertNewProduit ()
 {
 	bool ret = false;
 	if(this->m_Marche) {
-		int nbActuel = 0;
-		for(int i=0; i<this->m_NbPaletteTotal-1; i++)
+		if( m_NumProdEnCour < m_NbProduitTotal )
 		{
-			nbActuel += this->m_pPalettes[i]->GetNbProdActuels();
-		}
-		if(this->m_NbProduitTotal > nbActuel)
-		{
-			ret = true;
-			CProduit* nouveauProduit = new CProduit();
-			this->m_pProdEnCour = nouveauProduit;
+			m_pProdEnCour = new CProduit();
 			
-			if(this->m_NbProdParPalette < this->m_pPaletteEnCour->GetNbProdActuels())
-				this->m_pPaletteEnCour->AddProduit(nouveauProduit);
-			else
-				this->AjoutPalette();
+			// Si il n'y a plus de place sur la palette on en crée une autre
+			if( (*m_pPaletteEnCour).GetNbProdActuels()+1 > m_NbProdParPalette )
+			{
+				m_pPaletteEnCour = new CPalette( m_NbProdParPalette, m_pLesDest[m_NumPalEnCour]);
+				m_pPalettes[m_NumPalEnCour] = m_pPaletteEnCour;
+				m_NbPalProduites++;
+			}
+			ret = true;
 		}
 	}
 	
@@ -262,6 +259,7 @@ bool CMachine::Process()
 		try
 		{
 			srand(time(NULL));
+			// TODO: Fix alea qui renvoit toujours la même valeur
 			int alea = (rand() % (this->m_NbCateg - 1) + 1);
 			this->m_pProdEnCour->setCateg(alea);
 			this->m_pNbProdParCateg[this->m_pProdEnCour->getCateg()]++;
@@ -286,8 +284,7 @@ bool CMachine::EjectionProduit()
 		ret = true;
 		short currentProdCateg = (*m_pProdEnCour).getCateg();
 		// -1 pour aligner sur le tableau
-		currentProdCateg--;
-		m_pNbProdParCateg[currentProdCateg]--;
+		m_pNbProdParCateg[currentProdCateg-1]++;
 	}
 	
 	return ret;
@@ -309,37 +306,27 @@ bool CMachine::MarquageProduit()
 }
 
 /**
-* Permet d'ajouter une palette
-* @return Retourne false si la machine n'est pas en marche
-*/
+ * Ajoute le produit courant sur la palette en cours de chargement.
+ */
 bool CMachine::AjoutPalette()
 {
 	bool ret = false;
-	if(this->m_Marche) 
+	if ( m_Marche )
 	{
-		try
-		{	
-			this->m_NumProdEnCour++;
-			this->m_pPalettes[this->m_NumProdEnCour] = new CPalette(this->m_NbProdParPalette, m_pLesDest[this->m_NumProdEnCour]);
+		try {
+			m_NumProdEnCour++;
+			(*m_pPaletteEnCour).AddProduit( m_pProdEnCour );
+			ret = true;
+		} catch ( range_error e ) {
+			cout << "[-] Erreur : " << e.what() << endl; 
 		}
-		catch(invalid_argument e)
-		{
-			cout << "Erreur : " << e.what() << endl;
-		}
-		catch(range_error e)
-		{
-			cout << "Erreur : " << e.what() << endl;
-		}
-		
-		ret = true;
 	}
-	
 	return ret;
 }
 
 /**
-* Affiche l'état des éléments de la machine
-*/
+ * Affiche l'état des éléments de la machine
+ */
 void CMachine::Affiche()
 {
 	cout << "\nNbre de palettes complètes : " << GetNbPalProduites() << endl;
@@ -358,15 +345,17 @@ void CMachine::Affiche()
 }
 
 /**
-* Destructeur
-*/
+ * Destructeur
+ */
 CMachine::~CMachine()
 {
-	delete this->m_pProdEnCour;
-	for(int i=0; i < m_NbProdParPalette; i++)
+	// Il est déjà dans le tableau de palettes (double free)
+	//delete this->m_pProdEnCour;
+	for ( int j = 0; j < m_NumPalEnCour ; j++ )
 	{
-		delete this->m_pPalettes[i];
+		m_pPalettes[j].~CPalette();
+		delete m_pPalettes[j];
 	}
-	delete this->m_pPalettes;
-	delete this->m_pLesDest;
+	delete[] this->m_pPalettes;
+	delete[] this->m_pLesDest;
 }
