@@ -349,13 +349,14 @@ void CMachine::Affiche()
  */
 CMachine::~CMachine()
 {
-	// Il est déjà dans le tableau de palettes (double free)
-	//delete this->m_pProdEnCour;
+	cout << "[~] debut du Destructeur " << this << endl;
 	for ( int j = 0; j < m_NumPalEnCour ; j++ )
 	{
-		m_pPalettes[j].~CPalette();
-		delete m_pPalettes[j];
+	      delete m_pPalettes[j];
 	}
-	delete[] this->m_pPalettes;
-	delete[] this->m_pLesDest;
+	delete[] m_pPalettes;
+	// PBM
+	delete[] m_pNbProdParCateg;
+	// PBM
+	cout << "[~] fin du Destructeur " << this << endl;
 }
