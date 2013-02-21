@@ -59,6 +59,7 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 	}
 	try
 	{
+		m_pLesDest = pLesDest;
 		this->m_pPaletteEnCour = new CPalette(NbProdParPalette, pLesDest[0]);
 	}
 	catch(range_error e)
@@ -319,7 +320,7 @@ bool CMachine::AjoutPalette()
 		try
 		{	
 			this->m_NumProdEnCour++;
-			this->m_pPalettes[this->m_NumProdEnCour] = new CPalette(this->m_NbProdParPalette, pLesDest[this->m_NumProdEnCour]);
+			this->m_pPalettes[this->m_NumProdEnCour] = new CPalette(this->m_NbProdParPalette, m_pLesDest[this->m_NumProdEnCour]);
 		}
 		catch(invalid_argument e)
 		{

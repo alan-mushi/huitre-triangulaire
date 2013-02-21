@@ -173,7 +173,7 @@ int main()
 		
 	cout << "[*] Test de MarquageProduit ... ";
 	if((*m1).MarquageProduit())
-	cout << "Test réussi" << endl;
+		cout << "Test réussi" << endl;
 	else
 		cout << "Test failed : le marquage n'a pas été fait." << endl;
 		
