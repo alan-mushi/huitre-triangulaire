@@ -232,7 +232,6 @@ bool CMachine::InsertNewProduit ()
 			ret = true;
 			CProduit* nouveauProduit = new CProduit();
 			this->m_pProdEnCour = nouveauProduit;
-			this->Process();
 			
 			if(this->m_NbProdParPalette < this->m_pPaletteEnCour->GetNbProdActuels())
 				this->m_pPaletteEnCour->AddProduit(nouveauProduit);
