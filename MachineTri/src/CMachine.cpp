@@ -257,7 +257,6 @@ bool CMachine::Process()
 		{
 			srand(time(NULL));
 			int alea = (rand() % (this->m_NbCateg - 1) + 1);
-			cout << "Coucou ::" << alea << endl;
 			this->m_pProdEnCour->setCateg(alea);
 			this->m_pNbProdParCateg[this->m_pProdEnCour->getCateg()]++;
 		}
