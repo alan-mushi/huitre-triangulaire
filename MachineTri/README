@@ -1,6 +1,10 @@
-Toutes les classes ont étés écrites, y compris les classes de tests. La documentation a également
-été rédigée.
+Travail Accompli :
+Toutes les classes ont étés écrites, y compris les classes de tests.
+a documentation a également été rédigée.
 
 Compilation :
-On peut compiler tout le projet. Il reste cependant des erreurs : dans le destructeur de CMachine, le code plante.
-Le nombre aléatoire pour l'assignation des catégories est toujours le même.
+On peut compiler tout le projet.
+
+Erreurs résiduelles :
+Le destructeur de CMachine émet une SEGFAULT.
+Problème d'entropie pour l'assignation des catégories (catégories identiques).
