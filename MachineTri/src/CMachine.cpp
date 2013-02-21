@@ -312,8 +312,8 @@ bool CMachine::AjoutPalette()
 	{
 		try
 		{	
-			this->m_pPaletteEnCour->AddProduit(this->m_pProdEnCour);
 			this->m_NumProdEnCour++;
+			this->m_pPalettes[this->m_NumProdEnCour] = new CPalette(this->m_NbProdParPalette, pLesDest[this->m_NumProdEnCour]);
 		}
 		catch(invalid_argument e)
 		{
