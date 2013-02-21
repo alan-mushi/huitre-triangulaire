@@ -57,9 +57,6 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 		runtime_error e("Les destinations n'ont pas étés correctement définies.");
 		throw e;
 	}
-	// DEBUG
-	// CPalette( short nbProd = NbProdParPalette , const string dest = pLesDest[0]);
-	// DEBUG
 	try
 	{
 		this->m_pPaletteEnCour = new CPalette(NbProdParPalette, pLesDest[0]);
@@ -78,6 +75,15 @@ CMachine::CMachine(int NbCateg, int NbProduitTotal, int NbProdParPalette, string
 	{
 		this->m_pPalettes[i] = NULL;
 	}
+}
+
+/**
+ * Retourne l'état de l'attribut m_Marche
+ * @return Si la machine est en marche ou non.
+ */
+bool CMachine::GetMarche()
+{
+	return m_Marche;
 }
 
 /**
