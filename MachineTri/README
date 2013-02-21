@@ -1,8 +1,9 @@
 Travail Accompli :
 Toutes les classes ont étés écrites, y compris les classes de tests.
-a documentation a également été rédigée.
+La documentation a également été rédigée.
 
 Compilation :
+Pensez a créer le dossier bin à la racine du projet.
 On peut compiler tout le projet.
 
 Erreurs résiduelles :
