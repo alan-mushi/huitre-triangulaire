@@ -4,7 +4,7 @@
 #	- la compilation du lanceur associé à chaque classe à tester
 #	- la compilation du projet final (c-à-d tri.cpp)
 
-GPP=g++ -Wall -ggdb
+GPP=$(CXX) -Wall -ggdb
 SRC=./src
 BIN=./bin
 CP=CProduit
